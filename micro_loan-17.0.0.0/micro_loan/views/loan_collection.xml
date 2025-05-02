@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loan_collection_tree_view" model="ir.ui.view">
+        <field name="name">loan.collection.tree</field>
+        <field name="model">loan.collection</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" invisible="0"/>
+                <field name="loan_disbursement_id"/>
+                <field name="collection_amount"/>
+                <field name="loan_type"/>
+                <field name="installment"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="loan_collection_form_view" model="ir.ui.view">
+        <field name="name">loan.collection.form</field>
+        <field name="model">loan.collection</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="loan_disbursement_id"/>
+                            <field name="name"/> 
+                            <field name="collection_amount"/>
+                            <field name="loan_type"/>
+                        </group> 
+                        <group>   
+                            <field name="installment"/>
+                            <field name="loan_type"/>
+                            <field name="date"/>   
+                        </group>   
+                    </group>
+                    <!-- Page for Collection Line -->
+                        <notebook>
+                            <page string="Collection Line">
+                                <field name="collection_line_ids">
+                                    <tree string="Collection Line" editable="bottom">
+                                        <field name="serial_number"/>
+                                        <field name="name" invisible="1"/>
+                                        <field name="collection_date"/>
+                                        <field name="remaining_capital"/>
+                                        <field name="capital_repayment" sum = "Capital Repayment"/>
+                                        <field name="interest_repayment" sum = "Interest Repayment"/>
+                                        <field name="due_date_amount" sum = "Due Date Amount"/>
+                                        <field name="collection_status"/>
+                                        <field name="collection_amount" sum = "Collection Amount"/>            
+                                        <field name="collection_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="loan_collection_action" model="ir.actions.act_window">
+        <field name="name">Loan Collection</field>
+        <field name="res_model">loan.collection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

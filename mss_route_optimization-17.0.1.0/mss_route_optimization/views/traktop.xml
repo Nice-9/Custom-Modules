@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_traktop_form" model="ir.ui.view">
+            <field name="name">traktop.form</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <form string="Traktop">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="delivery_address"/>
+                            <field name="partner_latitude"/>
+                            <field name="partner_longitude"/>
+                            <!-- <field name="delivery_date"/> -->
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_traktop_list" model="ir.ui.view">
+            <field name="name">traktop.tree</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <tree editable="top" create="1" delete="1" multi_edit="1" open_form_view="True" >
+                    <field name="sale_order_id"/>
+                    <field name="partner_id"/>
+                    <field name="delivery_address"/>
+                    <!-- <field name="delivery_date"/>
+                    <field name="vehicle_name"/> -->
+                </tree>
+            </field>
+        </record>
+        <record id="view_traktop_search" model="ir.ui.view">
+            <field name="name">traktop.search</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <search string="Traktop">
+                    <field name="sale_order_id"/>
+                    <field name="partner_id"/>
+                    <separator/>
+                    <filter string="Delivery Date Range" name="delivery_date_range"
+                            domain="[('delivery_date', '>=', context_today().strftime('%Y-%m-%d'))]"
+                            date="delivery_date"/>
+                    <group expand="0" string="Group By" colspan="16">
+                        <filter string="Delivery Date" name="delivery_date" context="{'group_by':'delivery_date'}"/>
+                        <filter string="Customer" name="partner_id" context="{'group_by':'partner_id'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+
+        <!-- <record id="traktop_simple_map_view" model="ir.ui.view">
+            <field name="name">traktop.map.view</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <map res_partner="partner_id" routing="true"/>
+                
+            </field>
+        </record> -->
+        <!-- <record id="traktop_map_view" model="ir.ui.view">
+            <field name="name">traktop.map.view</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <form string="Trakop Map View">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="display_name" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
+        <!-- <record id="traktop_map_view" model="ir.ui.view">
+            <field name="name">traktop.map.view</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <form string="Trakop Map View">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="display_name" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
+
+        <record id="traktop_map_view" model="ir.ui.view">
+            <field name="name">traktop.map.view</field>
+            <field name="model">traktop</field>
+            <field name="arch" type="xml">
+                <form string="Trakop Map View">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="sale_order_id"/>
+                            <field name="display_name" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_traktop" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="res_model">traktop</field>
+            <field name="view_mode">tree,form,map</field>
+            <!-- <field name="search_view_id" ref="tracktop.view_traktop_search"/> -->
+            <field name="domain">[('sale_order_id', '!=', False)]</field>
+
+        </record>
+        <record id="action_traktop_map" model="ir.actions.act_window">
+            <field name="name">Route Optimization Map</field>
+            <field name="res_model">traktop</field>
+            <field name="view_mode">map</field>
+        </record>
+        <record id="action_optimized_rec_created" model="ir.actions.server">
+            <field name="name">Optimize Records</field>
+            <field name="model_id" ref="model_traktop"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.get_optimized_rec_created()
+            </field>
+        </record>
+
+        <menuitem id="traktop_main_menu" name="Route Optimization" sequence="10" web_icon="mss_route_optimization,static/description/icon.png"/>
+        <menuitem id="traktop_menu" name="Sales Orders" action="action_traktop" parent="traktop_main_menu"/>
+        <!-- <menuitem id="menu_traktop_map" name="Map" parent="traktop_main_menu" action="action_traktop_map"/> -->
+        <menuitem id="menu_traktop_map_optimize" name="Optimization" parent="traktop_main_menu"
+                  action="action_optimized_rec_created"/>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_partner_checkin_history,access_partner_checkin_history,bi_pos_scan_mobile_barcode.model_partner_checkin_history,base.group_user,1,1,1,1
+access_partner_checkin_log,access_partner_checkin_log,bi_pos_scan_mobile_barcode.model_partner_checkin_log,base.group_user,1,1,1,1

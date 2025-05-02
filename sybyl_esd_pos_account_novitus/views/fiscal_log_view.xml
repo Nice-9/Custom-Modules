@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="fiscal_log_list_view" model="ir.ui.view">
+        <field name="name">fiscal.log.list</field>
+        <field name="model">fiscal.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date" optional="show"/>
+                <field name="pos_order_id"/>
+                <field name="fiscal_receipt_no" string="Receipt No." optional="hide"/>
+                <field name="name"/>
+                <field name="response"/>
+            </tree>
+        </field>
+    </record>
+    <record id="fiscal_log_form_view" model="ir.ui.view">
+        <field name="name">fiscal.log.form</field>
+        <field name="model">fiscal.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="send_close_receipt" string="Close Receipt" type="object"
+                            invisible="pos_order_id == False" class="btn btn-info" icon="fa-print"
+                            groups="base.group_no_one"/>
+                    <button name="send_printer_request_action" string="Printer State" type="object"
+                            invisible="pos_order_id == False" icon="fa-check" class="btn btn-info"
+                            groups="base.group_no_one"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="pos_order_id"/>
+                            <field name="fiscal_receipt_no"/>
+                            <field name="session_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="config_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="create_uid" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="cashier" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <!-- <field name="pretty_xml" class="badge text-success border" style="font-size: 12px;"/>-->
+                        <field name="url"/>
+                        <field name="order_response"/>
+                        <field name="response"/>
+                        <field name="url_response"/>
+                        <field name="error_response" invisible="not error_response"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="fiscal_log_search_esd" model="ir.ui.view">
+        <field name="name">fiscal.log.search</field>
+        <field name="model">fiscal.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="pos_order_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Receipt No. is not set" name="fiscal_receipt_no"
+                            domain="[('fiscal_receipt_no', '=', False)]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="fiscal_log_action" model="ir.actions.act_window">
+        <field name="name">Fiscal Log</field>
+        <field name="res_model">fiscal.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'delete': False, 'create': False}</field>
+    </record>
+    <menuitem id="menu_fiscal_log" parent="point_of_sale.menu_point_config_product" action="fiscal_log_action"
+              sequence="100" groups="base.group_no_one"/>
+</odoo>

@@ -1,0 +1,6 @@
+xmltodict
+pyqrcode
+pypng
+pypdf
+rlPyCairo
+reportlab

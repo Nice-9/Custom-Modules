@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_esd" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='invoicing_settings']" position="after">
+                <h2>ESD Printer</h2>
+                <div class="row mt16 o_settings_container" id="esd_printer" groups="account.group_account_manager">
+                    <div class="col-12 col-lg-6 o_setting_box" id="esd_printer_config">
+                        <div class="o_setting_left_pane">
+                            <field name="is_esd_printer_enabled"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="is_esd_printer_enabled" string="Use ESD Printer (Company-Wise)"/>
+                            <span class="fa fa-lg fa-print" title="Values set here are company-specific."
+                                  aria-label="Values set here are company-specific."
+                                  groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Enable this to add Printer IP and Port configuration details.
+                                <br/>
+                                Values set here are company-specific.
+                            </div>
+                            <div class="content-group" invisible="is_esd_printer_enabled == False">
+                                <div class="mt16">
+                                    <div class="">
+                                        <field name="esd_printer_ip" placeholder="Add IP"/>
+                                        <field name="esd_printer_port" placeholder="Add PORT"/>
+                                        <br/>
+                                        <span class="o_form_label" groups="base.group_no_one">Response Type:</span>
+                                        <field name="response_type" groups="base.group_no_one"/>
+                                        <br/>
+                                        <span class="o_form_label">Exemption HS Code</span>
+                                        <field name="esd_exemption_hs_code"/>
+                                        <br/>
+                                        <span class="o_form_label">Exemption Tax</span>
+                                        <field name="esd_exemption_tax_id"
+                                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pos_config_tree_fiscal_printer" model="ir.ui.view">
+        <field name="name">pos.config.tree.view.fiscal.printer</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="iface_fiscal_printer_ip_address" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

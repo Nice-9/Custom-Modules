@@ -1,0 +1,32 @@
+<odoo>
+<template id="report_saledetails_inherit" inherit_id="point_of_sale.report_saledetails">
+	<xpath expr="//t[@id='payments']" position="before">
+		<table class="table table-sm table-hover" t-if="payments_config_wise">
+                <thead>
+                    <tr>
+                        <th>Payment Method</th>
+                        <!-- Dynamically include the headers for each config -->
+                        <t t-foreach="config_names_choosed" t-as="config_name">
+                            <th t-esc="config_name"/>
+                        </t>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="payments_config_wise" t-as="payment">
+                        <tr>
+                            <!-- Display payment method name -->
+                            <td t-esc="payment['name']['en_US']"/>
+                            <!-- Dynamically include the amounts for each config -->
+                            <t t-foreach="config_names_choosed" t-as="config_name">
+                                <td t-esc="round(payment.get(config_name, 0), 2)"/>
+                            </t>
+                            <!-- Display total of configs and total -->
+                            <td t-esc="round(payment.get('total', 0), 2)"/>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+	</xpath>
+</template>
+</odoo>

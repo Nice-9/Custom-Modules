@@ -1,0 +1,23 @@
+
+<odoo>
+    <record id="hr_contract_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit.l10n.ke.hr.payroll.inh</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="l10n_ke_hr_payroll.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//group[@name='salary_info']/group[@class='o_form_fw_labels'][2]" position="inside">
+        		<label for="l10n_ke_responsibility_allowance" invisible="country_code != 'KE'"/>
+                <div class="o_row" invisible="country_code != 'KE'">
+                    <field name="l10n_ke_responsibility_allowance" class="o_hr_narrow_field" nolabel="1"/>
+                    <span>/ month</span>
+                </div>
+        	</xpath>
+        </field>
+    </record>
+
+    <record id="rule_parameter_responsibility_alw_max" model="hr.rule.parameter">
+        <field name="name">Kenya: Maximum Responsibility Allowance</field>
+        <field name="code">l10n_ke_responsibility_alw_max</field>
+        <field name="country_id" ref="base.ke"/>
+    </record>
+</odoo>

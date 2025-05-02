@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="deposit_collection_tree_view" model="ir.ui.view">
+        <field name="name">deposit.collection.tree</field>
+        <field name="model">deposit.collection</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="installment_id"/>
+                <field name="deposit_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="deposit_collection_form_view" model="ir.ui.view">
+        <field name="name">deposit.collection.form</field>
+        <field name="model">deposit.collection</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="installment_id"/> 
+                            <field name="name"/>
+                            <field name="deposit_amount"/>
+                            <field name="loan_type"/>
+                        </group>
+                        <group>
+                            <label for="deposit_interest_rate"/>
+                                <div>
+                                    <field name="deposit_interest_rate" class="oe_inline"/>
+                                    <span class="o_form_label oe_inline">%</span>
+                                </div >
+                            <field name="deposit_installment"/> 
+                            <field name="date"/>
+                            <field name="is_clear"/>
+                        </group>   
+                    </group>
+                    <notebook>
+                        <page string="Deposit Collection Line">
+                            <field name="deposit_collection_line_ids">
+                                <tree string="Deposit Collection Line" editable="bottom">
+                                    <field name="serial_number"/>
+                                    <field name="name" invisible="1"/>
+                                    <field name="collection_date"/>
+                                    <field name="capital_repayment" sum = "Capital Payment"/>
+                                    <field name="interest_payment" sum = "Interest Payment"/>
+                                    <field name="due_date_amount" sum = "Due Date Amount"/>
+                                    <field name="collection_status"/>
+                                    <field name="collection_amount" sum = "Collection Amount"/>            
+                                    <field name="collection_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="deposit_collection_action" model="ir.actions.act_window">
+        <field name="name">Deposit Collection</field>
+        <field name="res_model">deposit.collection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

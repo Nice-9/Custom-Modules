@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="pos_config_view_form_inherit_fiscal_printers" model="ir.ui.view">
+        <field name="name">pos.config.form.inherit.fiscal.printer</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='other_devices']" position="after">
+                <setting id="pos_esd_devices" string="ESD Printer"
+                         help="Connect ESD device for your PoS">
+                    <field name="pos_esd_devices"/>
+                    <h6 class="mt16">IP Network Fiscal Printer</h6>
+                    <div class="content-group" invisible="pos_esd_devices == False">
+                        <div class="row">
+                            <label string="Printer IP:Port" for="iface_fiscal_printer_ip_address"
+                                   class="col-lg-3 o_light_label"/>
+                            <field name="iface_fiscal_printer_ip_address" class="oe_read_only"/>
+                            <div>
+                                <field name="client_app_ip" placeholder="192.168.0.1" class="oe_edit_only oe_inline"/>:
+                                <field name="client_app_port" placeholder="6001" class="oe_edit_only oe_inline"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label string="Response Type" for="response_type" class="col-lg-3 o_light_label"/>
+                            <field name="response_type"/>
+                        </div>
+                    </div>
+                    <div role="alert" class="alert alert-warning"
+                         invisible="iface_print_via_proxy != True or other_devices != True or iface_fiscal_printer_ip_address in [False, '']">
+                        The Network Fiscal printer will be used instead of the receipt printer connected to the IoT Box.
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

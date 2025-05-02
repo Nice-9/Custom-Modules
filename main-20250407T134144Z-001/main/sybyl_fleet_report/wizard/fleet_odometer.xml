@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_generator_fleet_odometer_report" model="ir.ui.view">
+        <field name="name">fleet.odometer.report</field>
+        <field name="model">fleet.odometer.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fleet Odometer Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="driver_id" options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="vehicle_id" options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_generate_report" string="Print Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_fleet_odometer_report_wizard" model="ir.actions.act_window">
+        <field name="name">Fleet Odometer Report</field>
+        <field name="view_mode">form</field>
+        <field name="res_model">fleet.odometer.report.wizard</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_fleet_odometer_report" name="Odometer Report"
+              parent="fleet.menu_fleet_reporting" sequence="10"
+              action="action_fleet_odometer_report_wizard"/>
+
+</odoo>
+

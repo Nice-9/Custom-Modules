@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user,access_user,model_user,,1,1,1,1
+access_loan_loan,access_loan_loan,model_loan_loan,,1,1,1,1
+access_file_information,access_file_information,model_file_information,,1,1,1,1
+access_loan_type,access_loan_type,model_loan_type,,1,1,1,1
+access_file_info,access_file_info,model_file_info,,1,1,1,1
+access_collateral_security,access_collateral_security,model_collateral_security,,1,1,1,1
+access_loan_disbursement,access_loan_disbursement,model_loan_disbursement,,1,1,1,1
+access_disbursement_line,access_disbursement_line,model_disbursement_line,,1,1,1,1
+access_loan_collection,access_loan_collection,model_loan_collection,,1,1,1,1
+access_collection_line,access_collection_line,model_collection_line,,1,1,1,1
+access_deposit_installment,access_deposit_installment,model_deposit_installment,,1,1,1,1
+access_deposit_line,access_deposit_line,model_deposit_line,,1,1,1,1
+access_deposit_collection,access_deposit_collection,model_deposit_collection,,1,1,1,1
+access_deposit_collection_line,access_deposit_collection_line,model_deposit_collection_line,,1,1,1,1
+access_deposit_handover,access_deposit_handover,model_deposit_handover,,1,1,1,1

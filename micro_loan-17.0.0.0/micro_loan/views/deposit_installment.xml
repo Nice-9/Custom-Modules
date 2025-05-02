@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="deposit_installment_tree_view" model="ir.ui.view">
+        <field name="name">deposit.installment.tree</field>
+        <field name="model">deposit.installment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="account_number_id"/>
+                <field name="name"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="deposit_installment_form_view" model="ir.ui.view">
+        <field name="name">deposit.installment.form</field>
+        <field name="model">deposit.installment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="account_number_id"/>
+                            <field name="name"/> 
+                            <field name="amount"/>   
+                        </group>
+                        <group>
+                            <field name="loan_type_id"/>
+                            <field name="installment"/> 
+                            <field name="date"/>
+                        </group>   
+                    </group>
+                    <notebook>
+                        <page string="Nominee" name="nominee">
+                            <group>
+                                <group>
+                                    <field name="nominee_name"/>
+                                    <field name="gender"/>
+                                    <field name="nominee_relation"/>
+                                    <field name="nominee_nationality"/>
+                                    <field name="nominee_sign"/>
+                                    <field name="nominee_photo"/> 
+                                </group>
+                                <group>
+                                    <field name="nominee_birth"/>
+                                    <field name="nominee_nid"/>
+                                    <field name="nominee_address"/>
+                                    <field name="nominee_contact"/>
+                                    <field name="nominee_email"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Deposit Installment Line">
+                            <field name="deposit_line_ids">
+                                <tree string="Deposit Installment Line" editable="bottom">
+                                    <field name="serial_number"/>
+                                    <field name="name" invisible="1"/>
+                                    <field name="collection_date"/>
+                                    <field name="capital_payment" sum = "Capital Payment"/>
+                                    <field name="due_date_amount" sum = "Due Date Amount"/>
+                                    <field name="collection_status" readonly="1"/>
+                                    <field name="collection_amount" sum = "Collection Amount" readonly="1"/>            
+                                    <field name="deposit_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="deposit_installment_action" model="ir.actions.act_window">
+        <field name="name">Deposit Installment</field>
+        <field name="res_model">deposit.installment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

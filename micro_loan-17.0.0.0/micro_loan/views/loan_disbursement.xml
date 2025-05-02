@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View definition for the tree view of the Loan Disbursement model -->
+    <record id="loan_disbursement_tree_view" model="ir.ui.view">
+        <field name="name">loan.disbursement.tree</field>
+        <field name="model">loan.disbursement</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" invisible="0"/>
+                <field name="loan_application_id"/>
+                <field name="disbursement_amount"/>
+                <field name="loan_type"/>
+                <field name="installment"/>
+            </tree>
+        </field>
+    </record>
+    <!-- View definition for the form view of the Loan Disbursement model -->
+    <record id="loan_disbursement_form_view" model="ir.ui.view">
+        <field name="name">loan.disbursement.form</field>
+        <field name="model">loan.disbursement</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="loan_application_id" domain="[('state','=','approved')]"/>
+                            <field name="name" invisible="0"/>
+                            <field name="disbursement_amount"/>
+                            <field name="loan_type"/>
+                        </group>
+                        <group>
+                            <label for="interest_rate"/>
+                                <div>
+                                    <field name="interest_rate" class="oe_inline"/>
+                                    <span class="o_form_label oe_inline">%</span>
+                                </div >
+                            <!-- <field name="interest_rate"/> -->
+                            <field name="installment"/>
+                            <field name="date"/>
+                        </group>    
+                    </group>
+                    <!-- Page for Disbursement Line -->
+                        <notebook>
+                            <page string="Disbursement Line">
+                                <field name="disbursement_line_ids">
+                                    <tree string="Disbursement Line" editable="bottom">
+                                        <field name="serial_number"/>
+                                        <field name="name" invisible="1"/>
+                                        <field name="collection_date"/>
+                                        <field name="remaining_capital"/>
+                                        <field name="capital_repayment" sum = "Capital Repayment"/>
+                                        <field name="interest_repayment" sum = "Interest Repayment"/>
+                                        <field name="due_date_amount" sum = "Due Date Amount"/>
+                                        <field name="collection_status" readonly="1"/>
+                                        <field name="collection_amount" sum = "Collection Amount" readonly="1"/>            
+                                        <field name="disbursement_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>  
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Action definition for the Loan Disbursement model -->
+    <record id="loan_disbursement_action" model="ir.actions.act_window">
+        <field name="name">Loan Disbursement</field>
+        <field name="res_model">loan.disbursement</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

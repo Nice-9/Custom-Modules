@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_generator_product_qrcode" model="ir.ui.view">
+        <field name="name">generate_qr_code</field>
+        <field name="model">generate.qrcode</field>
+        <field name="arch" type="xml">
+            <form string="Generate QR Code">
+                <group>
+                    <group>
+                        <field name="override_qr"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_qrcode" string="Generate QR Code" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                <field name="widget_ids"
+                       widget="section_and_note_one2many"
+                       mode="tree"
+                >
+                    <tree editable="bottom">
+                        <field name="default_code"/>
+                        <field name="name"/>
+                        <field name="list_price"/>
+                        <field name="standard_price"/>
+                        <field name="categ_id"/>
+                        <field name="type"/>
+                        <field name="qr_code"/>
+                    </tree>
+                </field>
+            </form>
+        </field>
+    </record>
+    <record id="bi_action_open_custom_wizard" model="ir.actions.act_window">
+        <field name="name">Generate QR Code</field>
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="binding_view_types">list</field>
+        <field name="view_mode">form</field>
+        <field name="res_model">generate.qrcode</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="bi_action_open_product_variants_wizard" model="ir.actions.act_window">
+        <field name="name">Generate QR Code</field>
+        <field name="binding_model_id" ref="model_product_product"/>
+        <field name="binding_view_types">list</field>
+        <field name="view_mode">form</field>
+        <field name="res_model">generate.qrcode</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>
+

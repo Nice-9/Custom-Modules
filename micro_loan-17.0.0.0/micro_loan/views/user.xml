@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="user_tree_view" model="ir.ui.view">
+        <field name="name">user.tree</field>
+        <field name="model">user</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="account_number"/>
+                <field name="name"/>
+                <field name="login"/> 
+            </tree>
+        </field>
+    </record>
+
+    <record id="user_form_view" model="ir.ui.view">
+        <field name="name">user.form</field>
+        <field name="model">user</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="account_number"/>
+                            <field name="name"/>
+                            <field name="login"/> 
+                            <field name="user_id" invisible="1"/>   
+                        </group>   
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="user_action" model="ir.actions.act_window">
+        <field name="name">User</field>
+        <field name="res_model">user</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

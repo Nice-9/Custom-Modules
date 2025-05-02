@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_tax_form_inherit_fiscal_ptu_value" model="ir.ui.view">
+        <field name="name">account.tax.form.inherit.fiscal_ptu_value</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tax_scope']" position="after">
+                <field name="fiscal_ptu_value"/>
+                <field name="factor_type"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_tax_fiscal_ptu_value_tree" model="ir.ui.view">
+        <field name="name">account.tax.fiscal.ptu.tree</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="fiscal_ptu_value"/>
+                <field name="factor_type"/>
+            </field>
+        </field>
+    </record>
+</odoo>

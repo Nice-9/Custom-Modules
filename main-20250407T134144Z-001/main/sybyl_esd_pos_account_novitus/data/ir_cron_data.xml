@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_account_move_fiscal_printer" model="ir.cron">
+        <field name="name">Account Move ESD Novitus Printer - Resync</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_account_move_fiscal_printer()</field>
+        <field name='interval_number'>10</field>
+        <field name='interval_type'>minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

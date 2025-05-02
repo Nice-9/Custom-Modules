@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_generate_qrcode,generate.qrcode,bi_qr_generator.model_generate_qrcode,bi_qr_generator.group_system_qr_code_field,1,1,1,1
+access_generate_qrcode_lines,generate.qrcode.lines,bi_qr_generator.model_generate_qrcode_lines,bi_qr_generator.group_system_qr_code_field,1,1,1,1
+

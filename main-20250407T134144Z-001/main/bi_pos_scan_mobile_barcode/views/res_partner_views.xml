@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_partner_view_tree_inherit_qr" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.qr</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="check_in_out_state" optional="hide"/>
+                <field name="subscription_state" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.qr.scan.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/widget[@name='web_ribbon']" position="after">
+                <widget name="web_ribbon" title="Check In" bg_color="text-bg-success" invisible="check_in_out_state or not has_subscription"/>
+                <widget name="web_ribbon" title="Check Out" bg_color="text-bg-danger"
+                        invisible="not check_in_out_state or not has_subscription"/>
+            </xpath>
+            <field name="category_id" position="after">
+                <field name="subscription_expiry_date" invisible="1"/>
+                <field name="subscription_state" invisible="1"/>
+                <field name="check_in_out_state" invisible="1"/>
+            </field>
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="Check In-Out Logs" name="check_in_out" invisible="0">
+                    <group string="Log">
+                        <field name="has_subscription" invisible="1"/>
+                        <field name="subscription_count" invisible="1"/>
+                        <field name="partner_checkin_history_ids" readonly="1" colspan="2" nolabel="1">
+                            <tree>
+                                <field name="partner_id" optional="hide"/>
+                                <field name="check_in"/>
+                                <field name="check_out"/>
+                                <field name="checkin_hours"/>
+                            </tree>
+                        </field>
+                        <field name="partner_checkin_log_ids" readonly="1" invisible="1">
+                            <tree>
+                                <field name="partner_id"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="bi_res_partner_search_view" model="ir.ui.view">
+        <field name="name">res.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="has_subscription"/>
+            </field>
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="Active Subscription" name="subscription_state"
+                        domain="[('subscription_state_store', '!=', False)]"/>
+                <filter string="Checked Out" name="check_in_state" domain="[('check_in_out_state', '!=', False),('has_subscription','=',True)]"/>
+                <filter string="Checked In" name="check_out_state" domain="[('check_in_out_state', '=', False),('has_subscription','=',True)]"/>
+            </xpath>
+            <xpath expr="//group/filter[last()]" position="after">
+                <separator/>
+                <filter name="check_in_out_state_group_by" string="Check In/Out" domain="[]" context="{'group_by': 'check_in_out_state'}"/>
+                <filter name="parent_id" string="Partner" context="{'group_by': 'parent_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_check_in_out_history_form" model="ir.ui.view">
+        <field name="name">check.in.out.history.form</field>
+        <field name="model">partner.checkin.history</field>
+        <field name="arch" type="xml">
+            <form edit="0">
+                <sheet>
+                    <group>
+                        <group>  
+                            <field name="partner_id"/>
+                            <field name="parent_id" invisible="1"/>
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="checkin_hours"/>
+                            <field name="dog_id"/>
+                            <field name="car_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_check_in_out_history_tree" model="ir.ui.view">
+        <field name="name">check.in.out.history.tree</field>
+        <field name="model">partner.checkin.history</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="partner_id"/>
+                <field name="parent_id" optional="hide"/>
+                <field name="dog_id"/>
+                <field name="car_id"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="checkin_hours"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_history_search" model="ir.ui.view">
+        <field name="name">history.search</field>
+        <field name="model">partner.checkin.history</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Parent Check In Out History">
+                <field name="partner_id"/>
+                <field name="dog_id"/>
+                <field name="car_id"/>
+                <field name="parent_id"/>
+                <field name="check_in"/>
+                <filter name="customer" string="Customer" domain="[('partner_id','!=',False)]"/>
+                <filter name="dogs" string="Dogs" domain="[('dog_id','!=',False)]"/>
+                <filter name="cars" string="Cars" domain="[('car_id','!=',False)]"/>
+                <group expand="0" string="Group By" colspan="4" name="check_in_out_history_group">
+                    <filter string="Primary Customer" name="groupby_parent_id" domain="[]"
+                            context="{'group_by': 'parent_id'}"/>
+                    <filter string="Individual Customer" name="groupby_partner_id" domain="[]"
+                            context="{'group_by': 'partner_id'}"/>
+                    <filter string="Cars" name="groupby_car_id" domain="[]"
+                            context="{'group_by': 'car_id'}"/>
+                    <filter string="Dogs" name="groupby_dog_id" domain="[]"
+                            context="{'group_by': 'dog_id'}"/>
+                    <!-- <filter string="Check In/Out" name="groupby_check_in_out" domain="[]" -->
+                            <!-- context="{'group_by': 'check_in_out_state'}"/> -->
+                </group>
+            </search>
+        </field>
+    </record>
+<!-- 
+
+    <record id="view_subscription_dog_form" model="ir.ui.view">
+        <field name="name">view.subscription.dog.form.inherit</field>
+        <field name="model">subscription.dog</field>
+        <field name="inherit_id" ref="sybyl_subscription_custom.view_subscription_dog_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="partner_checkin_history_ids"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_subscription_vehicle_form" model="ir.ui.view">
+        <field name="name">view.subscription.vehicle.form.inherit</field>
+        <field name="model">subscription.vehicle</field>
+        <field name="inherit_id" ref="sybyl_subscription_custom.view_subscription_vehicle_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <field name="partner_checkin_history_ids"/>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="action_check_in_out_history" model="ir.actions.act_window">
+        <field name="name">Check In Out History</field>
+        <field name="res_model">partner.checkin.history</field>
+        <field name="search_view_id" ref="view_history_search"/>
+        <field name="context">{'search_default_groupby_parent_id':1}</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            There is no entry found for any contact,dogs,cars.
+          </p><p>
+            Odoo helps you track all activities related Check In/Out History of Cars,Dogs and Customers.
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="res_partner_menu_check_in_out_history"
+    name="Check In Out History"
+    action="action_check_in_out_history"
+    parent="contacts.menu_contacts"
+    sequence="3"/>
+
+</odoo>

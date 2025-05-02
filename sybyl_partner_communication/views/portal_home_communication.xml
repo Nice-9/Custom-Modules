@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_sale_com" name="Portal layout : sales menu entries com" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li id="portal_breadcrumbs_sale_com" t-if="page_name == 'communication'" t-attf-class="breadcrumb-item">
+                <a>Communicatoin</a>
+            </li>
+            
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_expense_requests" name="Portal Purchase Requests" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[@id='portal_client_category']" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/sybyl_partner_communication/static/src/gel.svg'"/>
+                <t t-set="title">Communication</t>
+                <t t-set="text">View or write a message</t>
+                <t t-set="url" t-value="'/my/communication'"/>
+                <t t-set="placeholder_count" t-value="'order_count'"/>
+                <t t-set="config_card" t-value="True"/>
+            </t>
+        </xpath>
+    </template>
+
+	<template id="portal_my_communication" name="Partner Chatter">
+        <t t-call="portal.portal_layout">
+
+		    <div id="my_communication">
+	              <h3>Communication</h3>
+	              <t t-call="portal.message_thread">
+	              	<t t-set="object" t-value="partner_id"/>
+	              </t>
+	          </div>
+	      </t>
+  	</template>
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- View definition for the tree view of the File Information model -->
+    <record id="file_information_tree_view" model="ir.ui.view">
+        <field name="name">file.information.tree</field>
+        <field name="model">file.information</field>
+        <field name="arch" type="xml">
+        <!-- Fields to be displayed in the tree view -->
+            <tree>
+                <field name="name"/>
+                <field name="file_info"/>                 
+            </tree>
+        </field>
+    </record>
+
+       <!-- View definition for the form view of the File Information model -->
+    <record id="file_information_form_view" model="ir.ui.view">
+        <field name="name">file.information.form</field>
+        <field name="model">file.information</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="name"/>                             
+                        </group>
+                        <group>
+                            <field name="file_info"/> 
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action definition for the File Information model -->
+    <record id="file_information_action" model="ir.actions.act_window">
+        <field name="name">File Information</field>
+        <field name="res_model">file.information</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

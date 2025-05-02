@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Menu structure for the Micro Loan module -->
+    <menuitem id="micro_loan_menu_root"
+              name="Micro Loan"
+              web_icon="micro_loan,static/description/icon.png">
+
+        <menuitem id="user_menu"
+                  name="User"
+                  action="user_action"
+                  sequence="10">
+        </menuitem>
+        <menuitem id="loan_menu"
+                  name="Loan Application"
+                  action="loan_action"
+                  sequence="20">
+        </menuitem>
+        <menuitem id="loan_disbursement_menu"
+                  name="Loan Disbursement"
+                  action="loan_disbursement_action"
+                  sequence="30">
+        </menuitem>
+        <menuitem id="loan_collection_menu"
+                  name="Loan Collection"
+                  action="loan_collection_action"
+                  groups="base.group_erp_manager"
+                  sequence="40">
+        </menuitem>
+        <menuitem id="deposit_installment_menu"
+                  name="Deposit Installment"
+                  action="deposit_installment_action"
+                  sequence="50">
+        </menuitem>
+        <menuitem id="deposit_collection_menu"
+                  name="Deposit Collection"
+                  action="deposit_collection_action"
+                  groups="base.group_erp_manager"
+                  sequence="60">
+        </menuitem>
+        <menuitem id="deposit_handover_menu"
+                  name="Deposit Handover"
+                  action="deposit_handover_action"
+                  sequence="70">
+        </menuitem>
+        <!-- Menu item for Configuration -->
+        <menuitem id="menu_microfinance_config"
+            name="Configuration"
+            sequence="80">
+            <!-- Configuration Sub menues-->
+            <menuitem id="loan_type_menu"
+                      name="Loan Type"
+                      action="loan_type_action"
+                      sequence="10"/>
+            <menuitem id="file_information_menu"
+                      name="File Information"
+                      action="file_information_action"
+                      sequence="20"/>
+        </menuitem>           
+    </menuitem>
+</odoo>

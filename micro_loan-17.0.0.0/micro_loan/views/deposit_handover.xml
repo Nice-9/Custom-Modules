@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="deposit_handover_tree_view" model="ir.ui.view">
+        <field name="name">deposit.handover.tree</field>
+        <field name="model">deposit.handover</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="deposit_handover_id"/>
+                <field name="net_amount_2"/> 
+            </tree>
+        </field>
+    </record>
+
+    <record id="deposit_handover_form_view" model="ir.ui.view">
+        <field name="name">deposit.handover.form</field>
+        <field name="model">deposit.handover</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="deposit_handover_id" domain="[('is_clear','=',True)]"/>
+                            <field name="name" invisible="1"/>
+                            <field name="name_2"/>  
+                            <field name="handover_amount" invisible="1"/>
+                            <field name="handover_amount_2"/>
+                        </group>
+                        <group>
+                            <field name="interest_rate" class="oe_inline" invisible="1"/>
+
+                            <label for="interest_rate_2"/>
+                            <div>
+                                <field name="interest_rate_2" class="oe_inline"/>
+                                <span class="o_form_label oe_inline">%</span>
+                            </div>
+                            <field name="installment" invisible="1"/>
+                            <field name="installment_2"/>  
+                            <field name="interest_payment" invisible="1"/>
+                            <field name="interest_payment_2"/> 
+                            <field name="net_amount" invisible="1"/>
+                            <field name="net_amount_2"/>
+                        </group>    
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="deposit_handover_action" model="ir.actions.act_window">
+        <field name="name">Deposit Handover</field>
+        <field name="res_model">deposit.handover</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="company_view_esd_inherited" model="ir.ui.view">
+        <field name="name">res.company.form.esd.inherited</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="ESD printer config." groups="base.group_no_one">
+                    <group name="esd_printer">
+                        <field name="is_esd_printer_enabled"/>
+                        <field name="esd_printer_ip" class="oe_edit_only"
+                               invisible="is_esd_printer_enabled == False"/>
+                        <field name="esd_printer_port" class="oe_edit_only"
+                               invisible="is_esd_printer_enabled == False"/>
+                        <field name="esd_printer_ip_address" class="oe_read_only"
+                               invisible="is_esd_printer_enabled == False"/>
+                        <field name="response_type"/>
+                        <field name="esd_exemption_hs_code"/>
+                        <field name="esd_exemption_tax_id"
+                               options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

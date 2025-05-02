@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="sybyl_esd_pos_account_novitus.OrderReceiptLala" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt-order-data')]/p" position="before">
+            <t t-out="props.data.fiscal_receipt_no" t-if="props.data.fiscal_receipt_no"/><br/>
+            <t t-out="props.data.cus_no" t-if="props.data.cus_no"/><br/>
+            <t t-if="props.data.kra_qr_png_image">
+                <img t-attf-src="data:image/png;base64,{{props.data.kra_qr_png_image}}" alt="" style="text-align:center; width: 150px;"/>
+            </t>
+        </xpath>
+
+    </t>
+</templates>

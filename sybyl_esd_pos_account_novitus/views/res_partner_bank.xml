@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="view_partner_bank_form_inherit_mpesa" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.inherit.mpesa</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <field name="allow_out_payment" position="after">
+            	<field name="lipa_na_mpesa_type"/>
+            	<field name="paybill_till_num"/>
+            	<field name="account_number"/>
+            </field>
+        </field>
+    </record>
+</odoo>

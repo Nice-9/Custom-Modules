@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_product_variants_extended" model="ir.ui.view">
+        <field name="name">view.product.variants.extended</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <label for="qr_code"/>
+                <div>
+                    <field name="qr_code"/>
+                </div>
+                <label for="qr_image"/>
+                <div style="float:left;">
+                    <field name="qr_image" widget='image' class="oe_avatar"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_variants_tree" model="ir.ui.view">
+        <field name="name">view.product.variants.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="qr_code"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_product_screen_extended" model="ir.ui.view">
+        <field name="name">view.product.screen.extended</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <label for="qr_code"/>
+                <div>
+                    <field name="qr_code"/>
+                </div>
+                <label for="qr_image"/>
+                <div style="float:left;">
+                    <field name="qr_image" widget='image' class="oe_avatar"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="qr_product_template_search_view" model="ir.ui.view">
+        <field name="name">qr.product.template.search</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="qr_code"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_product_template_tree" model="ir.ui.view">
+        <field name="name">view.product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="qr_code"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

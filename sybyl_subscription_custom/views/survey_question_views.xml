@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="survey_question_form" model="ir.ui.view">
+        <field name="model">survey.question</field>
+        <field name="inherit_id" ref="enhanced_survey_management.survey_question_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='suggested_answer_ids']/tree/field[@name='product_id']" position="after">
+                <field name="subscription_type_id"
+                       column_invisible="parent.question_type not in ['simple_choice', 'multiple_choice']"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
