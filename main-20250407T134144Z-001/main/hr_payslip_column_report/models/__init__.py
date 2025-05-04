@@ -1,1 +1,0 @@
-from . import salary_rule_category

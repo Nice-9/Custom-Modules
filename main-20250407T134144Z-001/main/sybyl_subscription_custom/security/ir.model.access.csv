@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_subscription_dog,access_subscription_dog,model_subscription_dog,base.group_user,1,1,1,1
-access_subscription_vehicle,access_subscription_vehicle,model_subscription_vehicle,base.group_user,1,1,1,1
-access_dog_breed,access_dog_breed,model_dog_breed,base.group_user,1,1,1,0
-access_subscription_type,access_subscription_type,model_subscription_type,base.group_user,1,1,1,1
