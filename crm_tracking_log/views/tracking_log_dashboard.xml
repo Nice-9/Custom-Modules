@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_tracking_log_kanban" model="ir.ui.view">
+        <field name="name">crm.tracking.log.kanban</field>
+        <field name="model">crm.tracking.log</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="user_id"/>
+                <field name="timestamp"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="user_id"/></strong><br/>
+                            <span><field name="timestamp"/></span><br/>
+                            <span>Lat: <field name="latitude"/></span><br/>
+                            <span>Lon: <field name="longitude"/></span>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
