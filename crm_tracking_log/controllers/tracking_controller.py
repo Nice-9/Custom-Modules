@@ -42,11 +42,15 @@ class TrackingController(http.Controller):
                 'salesperson_id': data.get('salesperson_id'),
             })
 
-            
+
             return {
                 'salesperson': salesperson.name,
                 'lead': lead.name,
-                'location': data
+                'location': {
+                    'latitude': data.get('latitude'),
+                    'longitude': data.get('longitude'),
+                    'timestamp': data.get('timestamp')
+                }
             }
         except Exception as e:
             _logger.exception("Live tracking fetch failed")
