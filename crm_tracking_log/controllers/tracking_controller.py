@@ -35,12 +35,18 @@ class TrackingController(http.Controller):
             
             data = res.json()
             request.env['crm.tracking.log'].sudo().create({
-                'lead_id': salesperson,
-                'latitude': data.get('latitude'),
-                'longitude': data.get('longitude'),
-                'timestamp': data.get('timestamp'),
-                'salesperson_id': data.get('salesperson_id'),
+                # 'lead_id': salesperson,
+                # 'latitude': data.get('latitude'),
+                # 'longitude': data.get('longitude'),
+                # 'timestamp': data.get('timestamp'),
+                # 'salesperson_id': data.get('salesperson_id')
+
+                'lead_id': 1,
+                'latitude': 26.91,
+                'longitude': 75.78,
+                'salesperson_id': salesperson.id
             })
+
 
 
             return {
