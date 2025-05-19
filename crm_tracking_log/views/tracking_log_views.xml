@@ -32,7 +32,7 @@
           <field name="longitude"/>
           <!-- <field name="status"/>
           <field name="message"/> -->
-          <field name="date"/>
+          <field name="Timestamp"/>
         </group>
       </form>
     </field>
