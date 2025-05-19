@@ -33,8 +33,8 @@ class CrmLead(models.Model):
                 #'country': data.get('country'),
                 'latitude': data.get('latitude'),
                 'longitude': data.get('longitude'),
-                'status': 'success',
-                'message': 'Fetched location from tracking API.'
+                #'status': 'success',
+                #'message': 'Fetched location from tracking API.'
             })
 
         except requests.exceptions.RequestException as e:

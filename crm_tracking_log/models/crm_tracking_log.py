@@ -22,3 +22,6 @@ class CRMTrackingLog(models.Model):
             LIMIT 5
         """)
         return self.env.cr.dictfetchall()
+
+
+
