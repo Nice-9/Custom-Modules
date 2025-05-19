@@ -46,9 +46,9 @@
       <pivot string="Tracking Log Pivot">
         <field name="user_id"/>
         <field name="lead_id"/>
-        <field name="city"/>
+        <!-- <field name="city"/>
         <field name="country"/>
-        <field name="status"/>
+        <field name="status"/> -->
         <field name="date"/>
       </pivot>
     </field>

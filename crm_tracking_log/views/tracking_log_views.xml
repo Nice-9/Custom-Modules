@@ -46,12 +46,12 @@
       <search>
         <field name="user_id"/>
         <field name="lead_id"/>
-        <filter string="Success Only" domain="[('status','=','success')]"/>
-        <filter string="Failed Only" domain="[('status','=','failed')]"/>
+        <!-- <filter string="Success Only" domain="[('status','=','success')]"/>
+        <filter string="Failed Only" domain="[('status','=','failed')]"/> -->
         <group expand="1" string="Group By">
           <filter string="Lead" context="{'group_by': 'lead_id'}"/>
-          <filter string="City" context="{'group_by': 'city'}"/>
-          <filter string="Country" context="{'group_by': 'country'}"/>
+          <!-- <filter string="City" context="{'group_by': 'city'}"/>
+          <filter string="Country" context="{'group_by': 'country'}"/> -->
           <filter string="Date" context="{'group_by': 'date'}"/>
         </group>
       </search>
