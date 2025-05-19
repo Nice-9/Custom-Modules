@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
-class CRMTrackingLog(models.Model):
-    _name = 'crm.tracking.log'
+class CRMLeadTrackingLog(models.Model):
+    _name = 'crm.lead.tracking.log'
     _description = 'CRM Lead Tracking Log'
     _order = 'timestamp desc'
 
@@ -10,6 +10,11 @@ class CRMTrackingLog(models.Model):
     latitude = fields.Float('Latitude')
     longitude = fields.Float('Longitude')
     timestamp = fields.Datetime('Timestamp', default=fields.Datetime.now)
+    #country = fields.Char(string='Country')
+    #city = fields.Char(string='City')
+    #status = fields.Selection([('success', 'Success'), ('failed', 'Failed')], string='Status')
+    #message = fields.Text(string='Log Message')
+    #date = fields.Datetime(string='Date Logged', default=fields.Datetime.now)
 
     @api.model
     def get_top_locations(self):

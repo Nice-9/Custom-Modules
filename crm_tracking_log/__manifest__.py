@@ -1,5 +1,5 @@
 {
-    'name': 'CRM Tracking Log',
+    'name': 'CRM Lead Tracking Log',
     'version': '1.0',
     'category': 'CRM',
     'summary': 'Track salesperson locations and link to CRM leads',

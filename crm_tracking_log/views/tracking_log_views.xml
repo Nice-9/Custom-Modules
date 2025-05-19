@@ -1,118 +1,75 @@
-<!-- <odoo>
-    <record id="view_tracking_log_tree" model="ir.ui.view">
-        <field name="name">crm.tracking.log.tree</field>
-        <field name="model">crm.tracking.log</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="lead_id"/>
-                <field name="user_id"/>
-                <field name="latitude"/>
-                <field name="longitude"/>
-                <field name="timestamp"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_tracking_log_form" model="ir.ui.view">
-        <field name="name">crm.tracking.log.form</field>
-        <field name="model">crm.tracking.log</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="lead_id"/>
-                        <field name="user_id"/>
-                        <field name="latitude"/>
-                        <field name="longitude"/>
-                        <field name="timestamp"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="action_tracking_log" model="ir.actions.act_window">
-        <field name="name">Tracking Logs</field>
-        <field name="res_model">crm.tracking.log</field>
-        <field name="view_mode">tree,form,kanban</field>
-    </record>
-
-    <menuitem id="menu_tracking_log_root" name="Tracking Logs" parent="crm.crm_menu_root" action="action_tracking_log"/>
-</odoo> -->
-
 <odoo>
-    <!-- Tree View -->
-    <record id="crm_tracking_log_tree_view" model="ir.ui.view">
-        <field name="name">crm.tracking.log.tree</field>
-        <field name="model">crm.tracking.log</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="lead_id"/>
-                <field name="user_id"/>
-                <field name="latitude"/>
-                <field name="longitude"/>
-                <field name="timestamp"/>
-            </tree>
-        </field>
-    </record>
+  
+  <record id="view_crm_lead_tracking_log_tree" model="ir.ui.view">
+    <field name="name">crm.lead.tracking.log.tree</field>
+    <field name="model">crm.lead.tracking.log</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="lead_id"/>
+        <field name="user_id"/>
+        <!-- <field name="city"/> 
+        <field name="country"/> -->
+        <field name="latitude"/>
+        <field name="longitude"/>
+        <!-- <field name="status"/> -->
+        <field name="date"/>
+      </tree>
+    </field>
+  </record>
 
-    <!-- Kanban View -->
-    <record id="crm_tracking_log_kanban_view" model="ir.ui.view">
-        <field name="name">crm.tracking.log.kanban</field>
-        <field name="model">crm.tracking.log</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <field name="user_id"/>
-                <field name="latitude"/>
-                <field name="longitude"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_card">
-                            <strong><field name="user_id"/></strong><br/>
-                            <div><strong>Lead:</strong> <field name="lead_id"/></div>
-                            <div><strong>Lat:</strong> <field name="latitude"/></div>
-                            <div><strong>Long:</strong> <field name="longitude"/></div>
-                            <div><strong>Time:</strong> <field name="timestamp"/></div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+  <!-- Form View -->
+  <record id="view_crm_lead_tracking_log_form" model="ir.ui.view">
+    <field name="name">crm.lead.tracking.log.form</field>
+    <field name="model">crm.lead.tracking.log</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <field name="lead_id"/>
+          <field name="user_id"/>
+          <!-- <field name="city"/>
+          <field name="country"/> -->
+          <field name="latitude"/>
+          <field name="longitude"/>
+          <!-- <field name="status"/>
+          <field name="message"/> -->
+          <field name="date"/>
+        </group>
+      </form>
+    </field>
+  </record>
 
-    <!-- Graph View -->
-    <record id="crm_tracking_log_graph_view" model="ir.ui.view">
-        <field name="name">crm.tracking.log.graph</field>
-        <field name="model">crm.tracking.log</field>
-        <field name="arch" type="xml">
-            <graph string="Tracking Logs" type="bar">
-                <field name="timestamp" type="row"/>
-                <field name="user_id" type="col"/>
-                <field name="id" type="measure"/>
-            </graph>
-        </field>
-    </record>
+  <!-- Search View -->
+  <record id="view_crm_lead_tracking_log_search" model="ir.ui.view">
+    <field name="name">crm.lead.tracking.log.search</field>
+    <field name="model">crm.lead.tracking.log</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="user_id"/>
+        <field name="lead_id"/>
+        <filter string="Success Only" domain="[('status','=','success')]"/>
+        <filter string="Failed Only" domain="[('status','=','failed')]"/>
+        <group expand="1" string="Group By">
+          <filter string="Lead" context="{'group_by': 'lead_id'}"/>
+          <filter string="City" context="{'group_by': 'city'}"/>
+          <filter string="Country" context="{'group_by': 'country'}"/>
+          <filter string="Date" context="{'group_by': 'date'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
 
-    <!-- Action Window -->
-    <record id="action_crm_tracking_log" model="ir.actions.act_window">
-        <field name="name">Tracking Logs</field>
-        <field name="res_model">crm.tracking.log</field>
-        <field name="view_mode">tree,form,kanban,graph</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create and track salesperson location logs (with longitude and latitude) linked to CRM leads.
-            </p>
-        </field>
-    </record>
+  <!-- Action -->
+  <record id="action_crm_lead_tracking_log" model="ir.actions.act_window">
+    <field name="name">Lead Location Logs</field>
+    <field name="res_model">crm.lead.tracking.log</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_crm_lead_tracking_log_search"/>
+  </record>
 
-    <!-- Menu -->
-    <menuitem id="menu_crm_tracking_log_root"
-              name="Tracking Logs"
-              parent="crm.crm_menu_root"
-              sequence="80"/>
-
-    <menuitem id="menu_crm_tracking_log"
-              name="Logs"
-              parent="menu_crm_tracking_log_root"
-              action="action_crm_tracking_log"/>
+  <!-- Menu -->
+  <menuitem id="menu_crm_lead_tracking_log_root"
+            name="Lead Tracking Logs"
+            parent="crm.crm_menu_root"
+            action="action_crm_lead_tracking_log"
+            sequence="50"/>
 </odoo>
