@@ -9,7 +9,7 @@ class CRMLeadTrackingLog(models.Model):
     user_id = fields.Many2one('res.users', string='Salesperson', related='lead_id.user_id', store=True)
     latitude = fields.Float('Latitude')
     longitude = fields.Float('Longitude')
-    timestamp = fields.Datetime('Timestamp', default=fields.Datetime.now)
+    date = fields.Datetime('Date', default=fields.Datetime.now)
     #country = fields.Char(string='Country')
     #city = fields.Char(string='City')
     #status = fields.Selection([('success', 'Success'), ('failed', 'Failed')], string='Status')

@@ -55,7 +55,7 @@ class TrackingController(http.Controller):
                 'location': {
                     'latitude': data.get('latitude'),
                     'longitude': data.get('longitude'),
-                    'timestamp': data.get('timestamp')
+                    'date': data.get('date')
                 }
             }
         except Exception as e:
