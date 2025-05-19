@@ -21,7 +21,7 @@ class CrmLead(models.Model):
 
         user = self.user_id
         try:
-            api_url = f"https://your-tracking-api.com/location?user_id={user.id}"
+            api_url = f"http://178.128.158.75:30002/api/location/live/681de92f991d3c3f0e2f9817"
             response = requests.get(api_url, timeout=5)
             response.raise_for_status()
             data = response.json()
@@ -29,8 +29,8 @@ class CrmLead(models.Model):
             self.env['crm.lead.tracking.log'].create({
                 'lead_id': self.id,
                 'user_id': user.id,
-                'city': data.get('city'),
-                'country': data.get('country'),
+                #'city': data.get('city'),
+                #'country': data.get('country'),
                 'latitude': data.get('latitude'),
                 'longitude': data.get('longitude'),
                 'status': 'success',
