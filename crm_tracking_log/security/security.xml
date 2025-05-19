@@ -1,7 +1,17 @@
-<odoo>
+<!-- <odoo>
     <record id="rule_tracking_log_salesperson" model="ir.rule">
         <field name="name">Salesperson View Own Logs</field>
         <field name="model_id" ref="crm_tracking_log.model_crm_tracking_log"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo> -->
+
+
+<odoo>
+    <record id="rule_crm_lead_tracking_lead_user" model="ir.rule">
+        <field name="name">Users: See own lead tracking</field>
+        <field name="model_id" ref="model_crm_lead_tracking_log"/>
         <field name="domain_force">[('user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
     </record>
