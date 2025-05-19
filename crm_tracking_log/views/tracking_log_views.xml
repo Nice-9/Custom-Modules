@@ -39,7 +39,7 @@
   </record>
 
   <!-- Search View -->
-  <record id="view_crm_lead_tracking_log_search" model="ir.ui.view">
+  <!-- <record id="view_crm_lead_tracking_log_search" model="ir.ui.view">
     <field name="name">crm.lead.tracking.log.search</field>
     <field name="model">crm.lead.tracking.log</field>
     <field name="arch" type="xml">
@@ -56,7 +56,7 @@
         </group>
       </search>
     </field>
-  </record>
+  </record> -->
 
   <!-- Action -->
   <record id="action_crm_lead_tracking_log" model="ir.actions.act_window">
