@@ -4,7 +4,7 @@
         <field name="model">crm.lead.tracking.log</field>
         <field name="arch" type="xml">
             <tree>
-            
+                <field name="name"/>
                 <field name="date"/>
                 <field name="user_id"/>
                 <field name="lead_id"/>
@@ -20,7 +20,7 @@
         <field name="model">crm.lead.tracking.log</field>
         <field name="arch" type="xml">
             <kanban>
-                
+                <field name="name"/>
                 <field name="date"/>
                
                 <templates>
@@ -42,7 +42,6 @@
         <field name="arch" type="xml">
             <pivot>
                 <field name="user_id"/>
-                
                 <field name="date" type="row"/>
             </pivot>
         </field>

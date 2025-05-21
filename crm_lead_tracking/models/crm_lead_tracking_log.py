@@ -8,7 +8,7 @@ class CrmLeadTrackingLog(models.Model):
     _description = 'CRM Lead Tracking Log'
     _order = 'date desc'
 
-    #name = fields.Char(string='Location Name')
+    name = fields.Char(string='Location Name')
     date = fields.Datetime(string='Date', default=fields.Datetime.now)
     user_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
     lead_id = fields.Many2one('crm.lead', string='CRM Lead')
@@ -28,7 +28,7 @@ class CrmLeadTrackingLog(models.Model):
                 raise UserError(f"Tracking API error: {response.text}")
             data = response.json()
             self.create({
-                #'name': data.get('location_name', 'Unknown'),
+                'name': data.get('location_name', 'Unknown'),
                 'user_id': lead.user_id.id,
                 'lead_id': lead.id,
                 'latitude': data.get('latitude'),
