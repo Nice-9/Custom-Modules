@@ -20,7 +20,7 @@ class CrmLeadTrackingLog(models.Model):
     @api.model
     def create_tracking_log(self, lead):
         try:
-            api_url = f"http://178.128.158.75:30002/api/location/address/6819bc3204d2e5645172e320"
+            api_url = f"http://178.128.158.75:30002/api/location/live/6819bc3204d2e5645172e320"
             if not api_url:
                 raise UserError("Tracking API URL or token not configured in system parameters.")
             response = requests.get(api_url, timeout=20)
