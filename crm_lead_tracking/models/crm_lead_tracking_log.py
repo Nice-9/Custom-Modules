@@ -37,7 +37,7 @@ class CrmLeadTrackingLog(models.Model):
             })
         except Exception as e:
             self.create({
-                'name': 'Tracking Failed',
+                'name': 'Offline',
                 'user_id': lead.user_id.id,
                 'lead_id': lead.id,
                 #'status': 'failed',
