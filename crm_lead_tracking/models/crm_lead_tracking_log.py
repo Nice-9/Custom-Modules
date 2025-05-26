@@ -20,15 +20,45 @@ class CrmLeadTrackingLog(models.Model):
     @api.model
     def create_tracking_log(self, lead):
         try:
-            api_url = f"http://178.128.158.75:30002/api/location/live/6819bc3204d2e5645172e320"
+            
+            #api_url = f"http://178.128.158.75:30002/api/location/live/{res.partnerr_id}"
+            partner_id = lead.user_id.partner_id.id
+            api_url = f"https://apideylin.dibon.co.ke/api/location/live/{partner_id}"
             if not api_url:
                 raise UserError("Tracking API URL or token not configured in system parameters.")
             response = requests.get(api_url, timeout=20)
             if response.status_code != 200:
                 raise UserError(f"Tracking API error: {response.text}")
             data = response.json()
+            
+            # API Call for location name conversion
+            longitude = data.get('longitude')
+            latitude = data.get('latitude')
+            
+            # cla# Define the URL
+            url = "https://apideylin.dibon.co.ke/api/location/address"
+            params = {
+                "latitude": -1.2758110228317112,
+                "longitude": 36.78042445261435
+            }
+
+            try:
+                # Send GET request
+                response = requests.get(url, params=params)
+                response.raise_for_status()  # Raise an error for bad status codes
+
+                # Parse JSON response
+                name = response.json()
+                print("Response:", name)
+
+            except requests.exceptions.RequestException as e:
+                print("Error:", e)
+                name = "Unknown Location"
+
+
+
             self.create({
-                'name': data.get('location_name', 'Unknown'),
+                'name': name,
                 'user_id': lead.user_id.id,
                 'lead_id': lead.id,
                 'latitude': data.get('latitude'),
@@ -92,21 +122,3 @@ class CrmLead(models.Model):
 
 
 
-# cla# Define the URL
-# url = "http://127.0.0.1:8000/api/location/address"
-# params = {
-#     "latitude": -1.2758110228317112,
-#     "longitude": 36.78042445261435
-# }
-
-# try:
-#     # Send GET request
-#     response = requests.get(url, params=params)
-#     response.raise_for_status()  # Raise an error for bad status codes
-
-#     # Parse JSON response
-#     data = response.json()
-#     print("Response:", data)
-
-# except requests.exceptions.RequestException as e:
-#     print("Error:", e)
