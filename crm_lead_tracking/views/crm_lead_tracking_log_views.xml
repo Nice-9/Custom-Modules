@@ -36,21 +36,11 @@
         </field>
     </record>
 
-    <record id="view_crm_lead_tracking_log_pivot" model="ir.ui.view">
-        <field name="name">crm.lead.tracking.log.pivot</field>
-        <field name="model">crm.lead.tracking.log</field>
-        <field name="arch" type="xml">
-            <pivot>
-                <field name="user_id"/>
-                <field name="date" type="row"/>
-            </pivot>
-        </field>
-    </record>
 
     <record id="crm_lead_tracking_log_action" model="ir.actions.act_window">
         <field name="name">Lead Tracking Logs</field>
         <field name="res_model">crm.lead.tracking.log</field>
-        <field name="view_mode">tree,kanban,pivot</field>
+        <field name="view_mode">tree,kanban</field>
     </record>
 
     <menuitem id="crm_lead_tracking_log_menu_root" name="Lead Tracking" parent="crm.crm_menu_root"/>
