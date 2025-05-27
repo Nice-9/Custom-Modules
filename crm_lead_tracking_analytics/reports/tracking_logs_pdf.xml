@@ -1,0 +1,37 @@
+<odoo>
+    <report
+        id="action_tracking_log_pdf"
+        model="report.tracking.log.wizard"
+        string="Tracking Logs PDF"
+        report_type="qweb-pdf"
+        name="crm_lead_tracking_analytics.report_tracking_log_pdf"
+        file="crm_lead_tracking_analytics.report_tracking_log_pdf"
+    />
+
+    <template id="report_tracking_log_pdf">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Tracking Logs Report</h2>
+                <p>From: <t t-esc="data['start_date']"/> - To: <t t-esc="data['end_date']"/></p>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Salesperson</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="log">
+                            <tr>
+                                <td><t t-esc="log.user_id.name"/></td>
+                                <td><t t-esc="log.name or 'Offline'"/></td>
+                                <td><t t-esc="log.date"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

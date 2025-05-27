@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_tracking_log_graph" model="ir.ui.view">
+        <field name="name">tracking.log.graph</field>
+        <field name="model">crm.lead.tracking.log</field>
+        <field name="arch" type="xml">
+            <graph string="Logs by Salesperson" type="bar">
+                <field name="user_id" type="row"/>
+                <field name="id" type="measure"/>
+                <field name="date" interval="month"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_tracking_log_pivot" model="ir.ui.view">
+        <field name="name">tracking.log.pivot</field>
+        <field name="model">crm.lead.tracking.log</field>
+        <field name="arch" type="xml">
+            <pivot string="Logs by Location and Salesperson">
+                <field name="user_id" type="row"/>
+                <field name="name" type="col"/>
+                <field name="id" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+</odoo>
