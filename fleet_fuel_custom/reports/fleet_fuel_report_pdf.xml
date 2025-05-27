@@ -1,0 +1,11 @@
+<odoo>
+    <report
+        id="report_fuel_log_pdf"
+        string="Fuel Log PDF"
+        model="fleet.vehicle.log.fuel"
+        report_type="qweb-pdf"
+        name="fleet_fuel_custom.report_fuel_log_pdf"
+        file="fleet_fuel_custom.report_fuel_log_pdf"
+        print_report_name="'Fuel Logs - %s' % (object.vehicle_id.name or 'All')"
+    />
+</odoo>
