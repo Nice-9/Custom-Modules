@@ -22,7 +22,7 @@ class CrmLeadTrackingLog(models.Model):
         try:
             
             #api_url = f"http://178.128.158.75:30002/api/location/live/{res.partnerr_id}"
-            partner_id = lead.user_id.partner_id.id
+            partner_id = lead.user_id.partner_id
             api_url = f"https://apideylin.dibon.co.ke/api/location/live/{partner_id}"
             if not api_url:
                 raise UserError("Tracking API URL or token not configured in system parameters.")
@@ -49,7 +49,7 @@ class CrmLeadTrackingLog(models.Model):
 
                 # Parse JSON response
                 name = response.json()
-                name = name.data
+                name = name['full_address']
                 print("Response:", name)
 
             except requests.exceptions.RequestException as e:
