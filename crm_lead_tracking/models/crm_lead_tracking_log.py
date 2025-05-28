@@ -38,8 +38,8 @@ class CrmLeadTrackingLog(models.Model):
             # cla# Define the URL
             url = "https://apideylin.dibon.co.ke/api/location/address"
             params = {
-                "latitude": -1.2758110228317112,
-                "longitude": 36.78042445261435
+                "latitude": latitude,
+                "longitude": longitude,
             }
 
             try:
@@ -49,6 +49,7 @@ class CrmLeadTrackingLog(models.Model):
 
                 # Parse JSON response
                 name = response.json()
+                name = name.data
                 print("Response:", name)
 
             except requests.exceptions.RequestException as e:
