@@ -1,5 +1,5 @@
 {
-    'name': 'CRM Lead Tracking Analytics',
+    'name': 'Lead Tracking Analytics',
     'version': '1.0',
     'author': 'Dibon',
     'depends': ['base', 'crm'],
