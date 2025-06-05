@@ -1,7 +1,8 @@
 from odoo import models, fields, api
 
 class FleetVehicleLogFuel(models.Model):
-    _inherit = 'fleet.vehicle.log.fuel'
+    _name = 'fleet.vehicle.log.fuel'
+    _description = 'Fleet Vehicle Log Fuel'
 
     cost_per_litre = fields.Float(string='Cost per Litre')
     litres_estimated = fields.Float(string='Estimated Litres')
