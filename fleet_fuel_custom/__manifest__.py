@@ -1,5 +1,5 @@
 {
-    'name': 'Fuel Analytics',
+    'name': 'Fleet Fuel Custom',
     'version': '1.0',
     'summary': 'Fuel estimation, trip logs, and reporting for Odoo Fleet',
     'author': 'Dibon',
