@@ -25,6 +25,6 @@
     </record>
 
     <menuitem id="menu_tracking_log_report" name="Tracking Report"
-              parent="crm.crm_menu_reporting"
+              parent="base.crm_menu_reporting"
               action="action_tracking_log_report_wizard"/>
 </odoo>
