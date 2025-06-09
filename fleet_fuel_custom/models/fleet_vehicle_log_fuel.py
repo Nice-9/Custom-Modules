@@ -7,6 +7,7 @@ class FleetVehicleLogFuel(models.Model):
     cost_per_litre = fields.Float(string='Cost per Litre')
     litres_estimated = fields.Float(string='Estimated Litres')
     distance_estimated = fields.Float(string='Estimated Distance (km)')
+    liter = fields.Float(string="Actual Liters used", required=True)
     consumption_rate_estimated = fields.Float(string='Estimated Consumption Rate (km/l)', compute='_compute_estimation_fields', store=True)
     total_cost_estimated = fields.Float(string='Estimated Total Cost', compute='_compute_estimation_fields', store=True)
     fuel_variance = fields.Float(string='Fuel Variance (Actual - Estimated)', compute='_compute_variance', store=True)
