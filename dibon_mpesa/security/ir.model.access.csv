@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mpesa_log,access_mpesa_log,model_mpesa_log,,1,1,1,0
-access_pos_mpesa_payment,access_pos_mpesa_payment,model_pos_mpesa_payment,,1,1,1,1
-access_mpesa_sms_config_manager,mpesa.sms.config.manager,model_mpesa_sms_config,dibon_mpesa.group_mpesa_manager,1,1,1,1
-access_mpesa_sms_config_user,mpesa.sms.config.user,model_mpesa_sms_config,dibon_mpesa.group_mpesa_user,1,0,0,0
-access_mpesa_sms_log_manager,mpesa.sms.log.manager,model_mpesa_sms_log,dibon_mpesa.group_mpesa_manager,1,1,1,1
-access_mpesa_sms_log_user,mpesa.sms.log.user,model_mpesa_sms_log,dibon_mpesa.group_mpesa_user,1,1,0,0
