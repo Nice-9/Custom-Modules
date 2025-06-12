@@ -151,10 +151,10 @@ class CrmLeadTrackingLog(models.Model):
             record.name = record.full_address if record.full_address else "Location unknown"
 
     @api.model
-    def _get_location_coordinates(self, partner_id):
-        """Step 1: Get coordinates from partner_id"""
+    def _get_location_coordinates(self, device_address):
+        """Step 1: Get coordinates from device address"""
         try:
-            api_url = f"https://apideylin.dibon.co.ke/api/location/live/{partner_id}"
+            api_url = f"https://apideylin.dibon.co.ke/api/location/live/{device_address}"
             response = requests.get(api_url, timeout=10)
             response.raise_for_status()
             data = response.json()
@@ -167,7 +167,7 @@ class CrmLeadTrackingLog(models.Model):
                 'longitude': float(data['longitude'])
             }
         except requests.exceptions.RequestException as e:
-            _logger.error(f"Coordinates API failed for partner {partner_id}: {str(e)}")
+            _logger.error(f"Coordinates API failed for partner {device_address}: {str(e)}")
             raise UserError(_("Could not fetch coordinates: %s") % str(e))
 
     @api.model
@@ -189,13 +189,13 @@ class CrmLeadTrackingLog(models.Model):
     def create_tracking_log(self, lead):
         """Main method that orchestrates the sequence"""
         try:
-            if not lead.user_id or not lead.user_id.partner_id:
+            if not lead.user_id or not lead.user_id.device_address:
                 raise UserError(_("No valid salesperson assigned to this lead"))
 
-            partner_id = lead.user_id.partner_id.id
+            device_address = lead.user_id.device_address.id
             
-            # Step 1: Get coordinates using partner_id
-            coordinates = self._get_location_coordinates(partner_id)
+            # Step 1: Get coordinates using device address
+            coordinates = self._get_location_coordinates(device_address)
             
             # Step 2: Get location name using coordinates
             full_address = self._get_location_name(
