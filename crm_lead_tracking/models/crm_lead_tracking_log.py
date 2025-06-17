@@ -5,121 +5,12 @@ from datetime import datetime, timedelta
 import logging
 
 _logger = logging.getLogger(__name__)
-# class CrmLeadTrackingLog(models.Model):
-#     _name = 'crm.lead.tracking.log'
-#     _description = 'CRM Lead Tracking Log'
-#     _order = 'date desc'
 
-#     name = fields.Char(string='Location Name')
-#     date = fields.Datetime(string='Date', default=fields.Datetime.now)
-#     user_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
-#     lead_id = fields.Many2one('crm.lead', string='CRM Lead')
-#     latitude = fields.Float(string='Latitude')
-#     longitude = fields.Float(string='Longitude')
+class ResUsers(models.Model):
+    _inherit = 'res.users'
 
-#     #status = fields.Selection([('success', 'Success'), ('failed', 'Failed')], string='Status', default='success')
-#     #error_message = fields.Text(string="Error", readonly=True)
+    device_address = fields.Char(string='Device Address', help="Unique address of the tracking device assigned to the salesperson. This is used to fetch real-time location data.")
 
-#     @api.model
-#     def create_tracking_log(self, lead):
-#         try:
-            
-#             #api_url = f"http://178.128.158.75:30002/api/location/live/{res.partnerr_id}"
-#             partner_id = lead.user_id.partner_id
-#             api_url = f"https://apideylin.dibon.co.ke/api/location/live/{partner_id}"
-#             if not api_url:
-#                 raise UserError("Tracking API URL or token not configured in system parameters.")
-#             response = requests.get(api_url, timeout=20)
-#             if response.status_code != 200:
-#                 raise UserError(f"Tracking API error: {response.text}")
-#             data = response.json()
-            
-#             # API Call for location name conversion
-#             longitude = data.get('longitude')
-#             latitude = data.get('latitude')
-            
-#             # cla# Define the URL
-#             url = "https://apideylin.dibon.co.ke/api/location/address"
-#             params = {
-#                 "latitude": latitude,
-#                 "longitude": longitude,
-#             }
-
-#             try:
-#                 # Send GET request
-#                 response = requests.get(url, params=params)
-#                 response.raise_for_status()  # Raise an error for bad status codes
-
-#                 # Parse JSON response
-#                 name = response.json()
-#                 name = name['full_address']
-#                 print("Response:", name)
-
-#             except requests.exceptions.RequestException as e:
-#                 print("Error:", e)
-#                 name = "Unknown Location"
-
-
-
-#             self.create({
-#                 'name': partner_id,
-#                 'user_id': lead.user_id.id,
-#                 'lead_id': lead.id,
-#                 'latitude': data.get('latitude'),
-#                 'longitude': data.get('longitude'),
-#                 #'status': 'success',
-#             })
-#         except Exception as e:
-#             self.create({
-#                 'name': 'Offline',
-#                 'user_id': lead.user_id.id,
-#                 'lead_id': lead.id,
-#                 #'status': 'failed',
-#                 #'error_message': str(e),
-#             })
-
-#     def _generate_daily_tracking_notifications(self):
-#         today = fields.Date.context_today(self)
-#         yesterday = today - timedelta(days=1)
-
-#         # All logs created in the last 24 hours
-#         logs = self.env['crm.lead.tracking.log'].sudo().search([
-#             ('timestamp', '>=', yesterday),
-#             ('timestamp', '<', today)
-#         ])
-
-#         tracked_user_ids = set(logs.mapped('user_id').ids)
-
-#         all_users = self.env['res.users'].sudo().search([
-#             ('external_tracking_id', '!=', False),
-#             ('share', '=', False),
-#             ('active', '=', True),
-#         ])
-
-#         for user in all_users:
-#             tracked = user.id in tracked_user_ids
-#             self.env['mail.message'].create({
-#                 'subject': 'Tracking ' + ('Success' if tracked else 'Failed'),
-#                 'body': f'User {user.name} was ' + ('successfully tracked.' if tracked else 'not tracked in the last 24 hours.'),
-#                 'model': 'res.users',
-#                 'res_id': user.id,
-#                 'message_type': 'notification',
-#                 'subtype_id': self.env.ref('mail.mt_note').id,
-#                 'author_id': self.env.user.partner_id.id,
-#             })
-
-
-
-# class CrmLead(models.Model):
-#     _inherit = 'crm.lead'
-
-#     @api.model_create_multi
-#     def create(self, vals_list):
-#         leads = super().create(vals_list)
-#         for lead in leads:
-#             if lead.user_id:
-#                 self.env['crm.lead.tracking.log'].create_tracking_log(lead)
-#         return leads
 
 class CrmLeadTrackingLog(models.Model):
     _name = 'crm.lead.tracking.log'
@@ -192,7 +83,7 @@ class CrmLeadTrackingLog(models.Model):
             if not lead.user_id or not lead.user_id.device_address:
                 raise UserError(_("No valid salesperson assigned to this lead"))
 
-            device_address = lead.user_id.device_address.id
+            device_address = lead.user_id.device_address
             
             # Step 1: Get coordinates using device address
             coordinates = self._get_location_coordinates(device_address)
