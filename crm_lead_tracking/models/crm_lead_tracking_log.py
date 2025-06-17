@@ -154,7 +154,7 @@ class CrmLeadTrackingLog(models.Model):
     def _get_location_coordinates(self, device_address):
         """Step 1: Get coordinates from device address"""
         try:
-            api_url = f"https://apideylin.dibon.co.ke/api/location/live/{device_address}"
+            api_url = f"https://api.deylintracker.co.ke/api/location/live/{device_address}"
             response = requests.get(api_url, timeout=10)
             response.raise_for_status()
             data = response.json()
@@ -174,7 +174,7 @@ class CrmLeadTrackingLog(models.Model):
     def _get_location_name(self, latitude, longitude):
         """Step 2: Get location name from coordinates"""
         try:
-            url = "https://apideylin.dibon.co.ke/api/location/address"
+            url = "https://api.deylintracker.co.ke/api/location/address"
             response = requests.get(url, params={
                 'latitude': latitude,
                 'longitude': longitude
