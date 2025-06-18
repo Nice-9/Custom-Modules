@@ -3,7 +3,7 @@ from odoo import models, fields, api
 class FleetVehicleLogFuel(models.Model):
     _name = 'fleet.vehicle.log.fuel'
     _description = 'Vehicle Fuel Log'   
-    _order = 'date desc'
+    _order = 'date desc'        
     
 
 
