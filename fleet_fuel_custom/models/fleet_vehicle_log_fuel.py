@@ -4,10 +4,9 @@ class FleetVehicleLogFuel(models.Model):
     _name = 'fleet.vehicle.log.fuel'
     _description = 'Vehicle Fuel Log'   
     _order = 'date desc'
-    _rec_name = 'trip_id'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-
     
+
+
     cost_per_litre = fields.Float(string='Cost per Litre')
     litres_estimated = fields.Float(string='Estimated Litres')
     liter = fields.Float(string='Actual Litres', compute='_compute_estimation_fields', store=True)
