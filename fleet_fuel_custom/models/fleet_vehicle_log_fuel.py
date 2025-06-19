@@ -9,7 +9,6 @@ class FleetVehicleLogFuel(models.Model):
     litre = fields.Float(string='Actual Litres Used', required=True)
     litres_estimated = fields.Float(string='Estimated Litres')
     distance_estimated = fields.Float(string='Estimated Distance (km)')
-    liter = fields.Float(string="Actual Liters used", required=True)
     consumption_rate_estimated = fields.Float(string='Estimated Consumption Rate (km/l)', compute='_compute_estimation_fields', store=True)
     total_cost_estimated = fields.Float(string='Estimated Total Cost', compute='_compute_estimation_fields', store=True)
     fuel_variance = fields.Float(string='Fuel Variance (Actual - Estimated)', compute='_compute_variance', store=True)
@@ -28,5 +27,5 @@ class FleetVehicleLogFuel(models.Model):
     def _compute_variance(self):
         for rec in self:
             rec.fuel_variance = rec.litre - rec.litres_estimated if rec.litres_estimated else 0.0
-            actual_consumption = rec.distance_estimated / rec.liter if rec.liter else 0.0
+            actual_consumption = rec.distance_estimated / rec.litre if rec.litre else 0.0
             rec.consumption_variance = actual_consumption - rec.consumption_rate_estimated
