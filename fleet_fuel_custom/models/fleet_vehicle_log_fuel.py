@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class FleetVehicleLogFuel(models.Model):
-    _name = 'fleet.vehicle.log.fuel'
+    _inherit = 'fleet.vehicle.log.fuel'
     _description = 'Fleet Vehicle Log Fuel'
     _order = 'date desc'
 
