@@ -3,8 +3,10 @@ from odoo import models, fields, api
 class FleetVehicleLogFuel(models.Model):
     _name = 'fleet.vehicle.log.fuel'
     _description = 'Fleet Vehicle Log Fuel'
+    _order = 'date desc'
 
     cost_per_litre = fields.Float(string='Cost per Litre')
+    litre = fields.Float(string='Actual Litres Used', required=True)
     litres_estimated = fields.Float(string='Estimated Litres')
     distance_estimated = fields.Float(string='Estimated Distance (km)')
     liter = fields.Float(string="Actual Liters used", required=True)
@@ -22,9 +24,9 @@ class FleetVehicleLogFuel(models.Model):
             rec.total_cost_estimated = rec.cost_per_litre * rec.litres_estimated if rec.cost_per_litre and rec.litres_estimated else 0.0
             rec.consumption_rate_estimated = rec.distance_estimated / rec.litres_estimated if rec.litres_estimated else 0.0
 
-    @api.depends('liter', 'litres_estimated', 'distance_estimated')
+    @api.depends('litre', 'litres_estimated', 'distance_estimated')
     def _compute_variance(self):
         for rec in self:
-            rec.fuel_variance = rec.liter - rec.litres_estimated if rec.litres_estimated else 0.0
+            rec.fuel_variance = rec.litre - rec.litres_estimated if rec.litres_estimated else 0.0
             actual_consumption = rec.distance_estimated / rec.liter if rec.liter else 0.0
             rec.consumption_variance = actual_consumption - rec.consumption_rate_estimated
