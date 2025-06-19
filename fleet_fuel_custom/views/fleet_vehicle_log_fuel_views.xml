@@ -1,4 +1,4 @@
-<odoo>
+<!-- <odoo>
     <record id="view_fleet_vehicle_log_fuel_form_inherit" model="ir.ui.view">
         <field name="name">fleet.vehicle.log.fuel.form.inherit</field>
         <field name="model">fleet.vehicle.log.fuel</field>
@@ -20,4 +20,74 @@
             </xpath>
         </field>
     </record>
+</odoo> -->
+
+
+
+<odoo>
+    <!-- Custom Form View -->
+    <record id="view_fleet_vehicle_log_fuel_custom_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.log.fuel.custom.form</field>
+        <field name="model">fleet.vehicle.log.fuel</field>
+        <field name="arch" type="xml">
+            <form string="Fuel Log">
+                <sheet>
+                    <group>
+                        <field name="vehicle_id"/>
+                        <field name="date"/>
+                        <field name="cost_per_litre"/>
+                        <field name="litres_estimated"/>
+                        <field name="distance_estimated"/>
+                        <field name="litre"/>
+                        <field name="total_cost_estimated" readonly="1"/>
+                        <field name="consumption_rate_estimated" readonly="1"/>
+                        <field name="fuel_variance" readonly="1"/>
+                        <field name="consumption_variance" readonly="1"/>
+                        <field name="trip_id"/>
+                        <field name="driver_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Custom Tree View -->
+    <record id="view_fleet_vehicle_log_fuel_custom_tree" model="ir.ui.view">
+        <field name="name">fleet.vehicle.log.fuel.custom.tree</field>
+        <field name="model">fleet.vehicle.log.fuel</field>
+        <field name="arch" type="xml">
+            <tree string="Fuel Logs">
+                <field name="vehicle_id"/>
+                <field name="date"/>
+                <field name="liter"/>
+                <field name="litres_estimated"/>
+                <field name="fuel_variance"/>
+                <field name="cost_per_litre"/>
+                <field name="total_cost_estimated"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_vehicle_log_fuel_custom" model="ir.actions.act_window">
+        <field name="name">Fuel Logs (Custom)</field>
+        <field name="res_model">fleet.vehicle.log.fuel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_fleet_vehicle_log_fuel_custom_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record your vehicle's fuel usage for comparison and analysis.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_fleet_vehicle_log_fuel_custom"
+        name="Fuel Logs (Custom)"
+        parent="fleet.fleet_vehicle_menu_root"
+        action="action_fleet_vehicle_log_fuel_custom"
+        sequence="90"
+    />
 </odoo>
+
