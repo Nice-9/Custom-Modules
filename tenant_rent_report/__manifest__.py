@@ -1,5 +1,5 @@
 {
-    "name": "Tenant Rent Report",
+    "name": "Tenant Rent",
     "version": "1.0",
     "summary": "Manage and report tenant rent payments",
     "depends": ["base", "account", "web", "report_xlsx"],
