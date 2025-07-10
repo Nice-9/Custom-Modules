@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_form_tenant_rent" model="ir.ui.view">
+        <field name="name">tenant.rent.form</field>
+        <field name="model">tenant.rent</field>
+        <field name="arch" type="xml">
+            <form string="Tenant Rent">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="rent_amount"/>
+                        <field name="is_paid"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_tenant_rent" model="ir.ui.view">
+        <field name="name">tenant.rent.tree</field>
+        <field name="model">tenant.rent</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="rent_amount"/>
+                <field name="is_paid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tenant_rent_action" model="ir.actions.act_window">
+        <field name="name">Tenant Rent</field>
+        <field name="res_model">tenant.rent</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="tenant_rent_menu_root" name="Tenant Management"/>
+    <menuitem id="tenant_rent_menu" name="Rents" parent="tenant_rent_menu_root"/>
+    <menuitem id="tenant_rent_menu_action" name="Tenant Rent" parent="tenant_rent_menu" action="tenant_rent_action"/>
+</odoo>
