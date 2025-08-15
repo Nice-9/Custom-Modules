@@ -1,0 +1,24 @@
+<odoo>
+    <record id="crm_stage_form_requires_quotation" model="ir.ui.view">
+        <field name="name">crm.stage.form.requires.quotation</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Insert after the is_won field to ensure proper placement -->
+            <xpath expr="//field[@name='is_won']" position="after">
+                <field name="requires_quotation"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_stage_tree_requires_quotation" model="ir.ui.view">
+        <field name="name">crm.stage.tree.requires.quotation</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="requires_quotation"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
