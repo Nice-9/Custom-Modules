@@ -1,5 +1,9 @@
+certifi==2025.4.26
+charset-normalizer==3.4.2
 freetype-py==2.5.1
-pycairo==1.27.0
-pypng==0.20220715.0
+idna==3.10
+pycairo==1.28.0
+requests==2.32.3
 rlPyCairo==0.3.0
+urllib3==2.4.0
 xmltodict==0.14.2

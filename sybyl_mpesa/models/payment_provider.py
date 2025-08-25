@@ -60,17 +60,17 @@ class MpesaOnlineAcquirer(models.Model):
     mpesa_online_passkey = fields.Char(
         "MPESA Passkey",
         required_if_provider="mpesa_online",
-        default="bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
+        default="6a94071e9bfcfd193cf9db109829b602488357865b7c579f2cc07e0b429492f6",
     )
     mpesa_online_resource_url = fields.Char(
         "Resource URL",
         required_if_provider="mpesa_online",
-        default="https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+        default="https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
     )
     mpesa_online_access_token_url = fields.Char(
         "Access Token URL",
         required_if_provider="mpesa_online",
-        default="https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+        default="https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
     )
     mpesa_online_callback_url = fields.Char(
         "Callback URL",

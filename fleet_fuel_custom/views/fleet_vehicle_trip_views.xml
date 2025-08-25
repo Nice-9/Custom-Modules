@@ -1,0 +1,58 @@
+<odoo>
+    <record id="fleet_vehicle_trip_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.trip.form</field>
+        <field name="model">fleet.vehicle.trip</field>
+        <field name="arch" type="xml">
+            <form string="Trip">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="vehicle_id"/>
+                        <field name="driver_id"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                        <field name="origin"/>
+                        <field name="destination"/>
+                        <field name="distance_planned"/>
+                        <field name="distance_actual"/>
+                        <field name="duration_hours" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Fuel Logs">
+                            <field name="fuel_log_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="liter"/>
+                                    <field name="litres_estimated"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_trip_tree" model="ir.ui.view">
+        <field name="name">fleet.vehicle.trip.tree</field>
+        <field name="model">fleet.vehicle.trip</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="duration_hours"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_trip_action" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">fleet.vehicle.trip</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="fleet_trip_menu" name="Trips" parent="fleet.fleet_vehicle_menu_root" action="fleet_vehicle_trip_action"/>
+</odoo>

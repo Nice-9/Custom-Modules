@@ -1,0 +1,25 @@
+<odoo>
+    <template id="report_tenant_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Tenant Rent Report</h2>
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rent Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td><t t-esc="doc.name"/></td>
+                            <td><t t-esc="doc.rent_amount"/></td>
+                            <td><t t-esc="'Paid' if doc.is_paid else 'Unpaid'"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>
